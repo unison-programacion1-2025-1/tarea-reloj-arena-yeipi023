@@ -5,24 +5,22 @@ def reloj_arena(m: int, s: str) -> str:
 
     len_s = len(s)
     bloques_iniciales = 2 * m - 1
-    ancho_total_chars = bloques_iniciales * len_s
+    ancho_total = bloques_iniciales * len_s
     
-    lineas = []
-    i = 0
-    
-    while True:
-        ancho_actual = ancho_total_chars - (2 * i)
-        num_bloques = ancho_actual // len_s
-        
-        if num_bloques < 1:
-            break
-            
-        linea = ' ' * i + s * num_bloques
-        lineas.append(linea)
-        i += 1
+    # Calculamos matemáticamente cuántas líneas se necesitan para llegar a la punta
+    # Fórmula: (Ancho total - longitud mínima) / 2 + 1
+    limite = (ancho_total - len_s) // 2 + 1
 
-    for l in lineas:
-        print(l)
-        
-    for l in reversed(lineas[:-1]):
-        print(l)
+    # Parte superior
+    for i in range(limite):
+        espacios = i
+        ancho_actual = ancho_total - (2 * i)
+        num_bloques = ancho_actual // len_s
+        print(' ' * espacios + s * num_bloques)
+
+    # Parte inferior (espejo sin la punta)
+    for i in range(limite - 2, -1, -1):
+        espacios = i
+        ancho_actual = ancho_total - (2 * i)
+        num_bloques = ancho_actual // len_s
+        print(' ' * espacios + s * num_bloques)
