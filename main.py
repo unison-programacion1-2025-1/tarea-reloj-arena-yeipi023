@@ -1,8 +1,6 @@
-# Completa las validaciones y llama a la función
-
 import sys
 # TODO: importar la función reloj_arena
-from solucion import [NOMBRE_DE_LA_FUNCION]
+from solucion import reloj_arena
 
 def main():
     """
@@ -10,31 +8,38 @@ def main():
           donde cada elemento de la lista es un string    
     """
 
-    # IF que permite leer desde la entrada estándar o pedir datos al usuario
     if sys.stdin.isatty():
         data = []
-        data.append(input("Ingresa la altura: ").strip())
-        data.append(input("Ingresa el caracter: "))
+        val1 = input("Ingresa la altura: ").strip()
+        val2 = input("Ingresa el caracter: ")
+     
+        if val1: data.append(val1)
+        if val2: data.append(val2)
     else:
+      
         data = sys.stdin.read().strip().splitlines()
 
-    # Validar que se recibieron dos líneas
+    # Validar que se recibieron al menos dos líneas
     if len(data) < 2:
         print("Error: Se esperan 2 lineas de entrada (altura, caracter)")
         return
 
-    m_str = data[0].strip() # Primera línea: altura máxima (como texto)
-    s = data[1]             # Segunda línea: carácter (o cadena) para la figura
+    m_str = data[0].strip() # Primera línea: altura máxima
+    s = data[1]             # Segunda línea: carácter
 
-    # Intentar convertir la altura a entero
+
+    if len(s) == 0:
+        print("Error: El caracter no puede ser vacío")
+        return
+
     try:
-        # TODO: Convertir m_str a entero y asignarlo a m
-        pass
+        m = int(m_str)
     except ValueError:
-        # TODO: imprimir "Error: La altura debe ser un numero entero" y salir
-        pass
+        print("Error: La altura debe ser un numero entero")
+        return
 
-    # TODO: llamar a la función reloj_arena con los parámetros m y s
+    
+    reloj_arena(m, s)
 
 if __name__ == "__main__":
     main()
